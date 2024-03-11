@@ -8,7 +8,82 @@
   </head>
   <body>
     <script>
+      class pelicula {
+        constructor({
+          id,
+          titulo,
+          director,
+          estreno,
+          pais,
+          generos,
+          calificacion,
+        }) {
+          this.id = id;
+          this.titulo = titulo;
+          this.director = director;
+          this.estreno = estreno;
+          this.pais = pais;
+          this.generos = generos;
+          this.calificacion = calificacion;
 
+          this.validarIMBD(id);
+          this.validarTitulo(titulo);
+          this.validarDirector(director);
+        }
+        validadCaneda(propiedad, valor) {
+          if (!valor) return console.warn`${propiedad} '${valor} está vacío.'`;
+
+          if (typeof valor !== "string")
+            return console.error(
+              `${propiedad} '${valor}' ingresado, NO es una cadena de texto.`
+            );
+
+          return true;
+        }
+
+        validarLongitudCadena(propiedad, valor, longitud) {
+          if (valor.length > longitud)
+            return console.error(
+              `${propiedad} '${valor}' excede el número de caracteres permitidos (${longitud}).`
+            );
+        }
+
+        valorIMDB(id) {
+          if (this.validarCadena("IMDB id", id))
+            if (!/^([a-z]){2}({[0-9]}){7}$/.test(id))
+              return console.error(
+                `IMDB id '${id}' no es válido, debe tener 9 carácteristicas, los 2 letras miúsculas, los 7 restantes números.`
+              );
+        }
+
+        valorTitulo(titulo) {
+          if (this.validarCadena("Título", titulo))
+            this.validarLongitudCadena("Título", titulo, 100);
+        }
+
+        valorDirector(director) {
+          if (this.validarCadena("Director", director))
+            this.validarLongitudCadena("Director", director, 50);
+        }
+      }
+
+      const peli = new Pelicula({
+        id: "ab1234567",
+        titulo: 'Titulo de la Peli',
+        director:' '
+      });
+
+      let array = [1, 2, 3, 4, 5, 6, 7];
+
+      let objetoPeli = {
+        id,
+        titulo,
+        director,
+        anioEstreno,
+        paisOrigen,
+        generos,
+        calificacion,
+      };
     </script>
   </body>
 </html>
